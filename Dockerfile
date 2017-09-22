@@ -4,12 +4,11 @@
 
 FROM registry.access.redhat.com/rhel7-atomic
 RUN curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/7/mssql-server.repo
-RUN \
+RUN microdnf --enablerepo mssql-server install mssql-server
 #microdnf --enablerepo rhel-7-server-rpms install libicu ;\
 #microdnf --enablerepo rhel-7-server-rpms install http-parser ;\
 #microdnf --enablerepo rhel-7-server-extras-rpms --enablerepo rhel-7-server-optional-rpms --enablerepo epel install nodejs ;\
 #microdnf clean all
-RUN microdnf --enablerepo mssql-server install mssql-server
 
 # Default SQL Server TCP/Port.
 EXPOSE 1433
