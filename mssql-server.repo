@@ -1,0 +1,6 @@
+[mssql-server]
+name=mssql-server
+baseurl=https://packages.microsoft.com/rhel/7/mssql-server/
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc
