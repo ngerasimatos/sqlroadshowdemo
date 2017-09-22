@@ -3,7 +3,7 @@
 # GitRepo: https://github.com/Microsoft/mssql-docker
 
 FROM registry.access.redhat.com/rhel7-atomic
-RUN curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/7/mssql-server.repo
+COPY mssql-server.repo /etc/yum.repos.d/mssql-server.repo
 RUN microdnf --enablerepo mssql-server install mssql-server
 #microdnf --enablerepo rhel-7-server-rpms install libicu ;\
 #microdnf --enablerepo rhel-7-server-rpms install http-parser ;\
