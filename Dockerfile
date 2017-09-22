@@ -4,7 +4,7 @@
 
 FROM registry.access.redhat.com/rhel7-atomic
 COPY mssql-server.repo /etc/yum.repos.d/mssql-server.repo
-RUN microdnf --enablerepo rhel-7-server-rpms install bzip2
+RUN microdnf --enablerepo rhel-7-server-rpms install bzip2 gdb
 RUN microdnf --enablerepo mssql-server install mssql-server
 #microdnf --enablerepo rhel-7-server-rpms install libicu ;\
 #microdnf --enablerepo rhel-7-server-rpms install http-parser ;\
