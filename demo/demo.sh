@@ -19,7 +19,7 @@ read
 clear
 
 printf "\nConnect locally to the SQL Server instance to verify database access\n\n"
-printf "$ sqlcmd -S localhost -U SA -P yourStrong@Password
+printf "$ sqlcmd -S localhost -U SA -P yourStrong@Password"
 read
 sqlcmd -S localhost -U SA -P RedHat123!
 
