@@ -26,110 +26,89 @@ printf "\tTo save time the host has been previously updated ('yum update').\n"
 read 
 
 clear
-printf "\n\tThis demonstration consists of three parts:\n\n"
-printf "\t\tInstallation of SQL Server 2017\n"
-printf "\t\tInstallation of SQL Server Command Line Tools\n"
+printf "\n\tThis demonstration consists of:\n\n"
 printf "\t\tSample Database Load and Query\n\n"
 printf "\tThe total time required to complete these steps is approximately 5 minutes.\n\n"
 printf "\tLet's get started!!!\n"
 read
 
 clear
-printf "\n"
-printf "**************************\n"
-printf "*** Install SQL Server ***\n"
-printf "**************************\n"
 
-printf "\n1. Download the Microsoft SQL Server Red Hat repository configuration file\n\n"
-printf "$ sudo curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/7/mssql-server.repo"
-read
-sudo curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/7/mssql-server.repo
+#clear
+#printf "\n3. Run SQL Server Setup\n\n"
+#printf "$ sudo systemctl stop mssql-server"
+#read
+#sudo systemctl stop mssql-server
+#printf "\n"
+#printf "$ sudo /opt/mssql/bin/mssql-conf setup"
+#read
+#sudo /opt/mssql/bin/mssql-conf setup
 
-read
-clear
-printf "\n2. Install SQL Server 2017\n\n"
-printf "$ sudo yum install -y mssql-server"
-read
-sudo yum install -y mssql-server
+#read
+#clear
+#printf "\n4. Verify SQL Server service is running\n\n"
+#printf "$ systemctl status mssql-server"
+#read
+#systemctl status mssql-server
 
-read
-clear
-printf "\n3. Run SQL Server Setup\n\n"
-printf "$ sudo systemctl stop mssql-server"
-read
-sudo systemctl stop mssql-server
-printf "\n"
-printf "$ sudo /opt/mssql/bin/mssql-conf setup"
-read
-sudo /opt/mssql/bin/mssql-conf setup
+#read
+#clear
+#printf "\n5. Configure Firewall connections to allow remote access to port 1433/tcp\n\n"
+#printf "$ sudo firewall-cmd --zone=public --add-port=1433/tcp --permanent"
+#read
+#sudo firewall-cmd --zone=public --add-port=1433/tcp --permanent
+#printf "\n"
+#printf "$ sudo firewall-cmd --reload" 
+#read
+#sudo firewall-cmd --reload 
 
-read
-clear
-printf "\n4. Verify SQL Server service is running\n\n"
-printf "$ systemctl status mssql-server"
-read
-systemctl status mssql-server
+#printf "\n"
+#printf "***************************************\n"
+#printf "*** Install of SQL Server Completed ***\n"
+#printf "***************************************\n"
+#read
+#clear
 
-read
-clear
-printf "\n5. Configure Firewall connections to allow remote access to port 1433/tcp\n\n"
-printf "$ sudo firewall-cmd --zone=public --add-port=1433/tcp --permanent"
-read
-sudo firewall-cmd --zone=public --add-port=1433/tcp --permanent
-printf "\n"
-printf "$ sudo firewall-cmd --reload" 
-read
-sudo firewall-cmd --reload 
+#printf "\n"
+#printf "*********************************************\n"
+#printf "*** Install SQL Server Command Line Tools ***\n"
+#printf "*********************************************\n"
 
-printf "\n"
-printf "***************************************\n"
-printf "*** Install of SQL Server Completed ***\n"
-printf "***************************************\n"
-read
-clear
+##printf "\n1. Download the Microsoft SQL Server Red Hat repository configuration file\n\n"
+##printf "$ sudo curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/7/prod.repo"
+#read
+#sudo curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/7/prod.repo
 
-printf "\n"
-printf "*********************************************\n"
-printf "*** Install SQL Server Command Line Tools ***\n"
-printf "*********************************************\n"
+#read
+#clear
+#printf "\n2. Remove any previous versions of mssql-tools\n\n"
+#printf "$ sudo yum remove unixODBC-utf16 unixODBC-utf16-devel"
+#read
+#sudo yum remove unixODBC-utf16 unixODBC-utf16-devel
+#clear
+#printf "\n3. Install mssql-tools and the unixODBC developer package\n\n"
+#printf "$ sudo yum install -y mssql-tools unixODBC-devel"
+#read
+#sudo yum install -y mssql-tools unixODBC-devel
 
-printf "\n1. Download the Microsoft SQL Server Red Hat repository configuration file\n\n"
-printf "$ sudo curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/7/prod.repo"
-read
-sudo curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/7/prod.repo
+#read
+#clear
+#printf "\n4. Add /opt/mssql-tools/bin to your PATH\n\n"
+#printf "$ echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile"
+#read
+#echo 'export PATH=$PATH:/opt/mssql-tools/bin' >> ~/.bash_profile
 
-read
-clear
-printf "\n2. Remove any previous versions of mssql-tools\n\n"
-printf "$ sudo yum remove unixODBC-utf16 unixODBC-utf16-devel"
-read
-sudo yum remove unixODBC-utf16 unixODBC-utf16-devel
+#printf "\n"
+#printf "$ echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc"
+#read
+#echo 'export PATH=$PATH:/opt/mssql-tools/bin' >> ~/.bashrc
 
-read
-clear
-printf "\n3. Install mssql-tools and the unixODBC developer package\n\n"
-printf "$ sudo yum install -y mssql-tools unixODBC-devel"
-read
-sudo yum install -y mssql-tools unixODBC-devel
+#printf "\n"
+#printf "$ source ~/.bashrc"
+#read
+#source ~/.bashrc
 
-read
-clear
-printf "\n4. Add /opt/mssql-tools/bin to your PATH\n\n"
-printf "$ echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bash_profile"
-read
-echo 'export PATH=$PATH:/opt/mssql-tools/bin' >> ~/.bash_profile
-
-printf "\n"
-printf "$ echo 'export PATH="$PATH:/opt/mssql-tools/bin"' >> ~/.bashrc"
-read
-echo 'export PATH=$PATH:/opt/mssql-tools/bin' >> ~/.bashrc
-
-printf "\n"
-printf "$ source ~/.bashrc"
-read
-source ~/.bashrc
-
-read
+#read
 clear
 printf "\n5. Connect locally to the SQL Server instance to verify database access\n\n"
 printf "$ sqlcmd -S localhost -U SA -P <YourPasswordHere>"

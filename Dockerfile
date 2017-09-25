@@ -21,7 +21,7 @@ LABEL name="microsoft/mssql-server-linux" \
 # Install latest mssql-server package
 RUN curl https://packages.microsoft.com/config/rhel/7/mssql-server.repo > /etc/yum.repos.d/mssql-server.repo && \
     curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/msprod.repo && \
-    ACCEPT_EULA=Y yum install -y mssql-server mssql-tools && \
+    ACCEPT_EULA=Y yum install -y mssql-server mssql-tools unixODBC-devel && \
     yum clean all
 
 ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools/bin
@@ -31,7 +31,7 @@ EXPOSE 1433
 
 VOLUME /var/opt/mssql
 
-COPY demo . 
+COPY demo ./demo
 
 # Run SQL Server process
 CMD sqlservr --accept-eula
