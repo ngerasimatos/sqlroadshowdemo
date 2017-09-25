@@ -15,6 +15,9 @@ LABEL name="microsoft/mssql-server-linux" \
       io.k8s.description="MS SQL Server is ....." \
       io.k8s.display-name="MS SQL Server Developer Edition"
 
+RUN useradd -ms /bin/bash mssql
+USER mssql
+WORKDIR /home/mssql
 RUN yum install -y sudo
 # Install latest mssql-server package
 RUN REPOLIST=rhel-7-server-rpms,rhel-7-server-optional-rpms,packages-microsoft-com-mssql-server,packages-microsoft-com-prod && \
