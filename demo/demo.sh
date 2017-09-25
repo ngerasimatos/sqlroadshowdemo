@@ -111,7 +111,7 @@ clear
 #read
 clear
 printf "\n5. Connect locally to the SQL Server instance to verify database access\n\n"
-printf "$ sqlcmd -S localhost -U SA -P <YourPasswordHere>"
+printf "$ sqlcmd -S localhost -U SA -P yourStrong@Password
 read
 sqlcmd -S localhost -U SA -P RedHat123!
 
@@ -133,7 +133,7 @@ read
 more Load_DB.sql
 printf "\n"
 
-printf "$ sqlcmd -U SA -P <YourPasswordHere> -i Load_DB.sql"
+printf "$ sqlcmd -U SA -P yourStrong@Password -i Load_DB.sql"
 read
 sqlcmd -U SA -P RedHat123! -i Load_DB.sql
 
@@ -147,7 +147,7 @@ printf "$ more Query_DB.sql"
 read
 more Query_DB.sql
 printf "\n"
-printf "$ sqlcmd -U SA -P <YourPasswordHere> -i Query_DB.sql"
+printf "$ sqlcmd -U SA -P yourStrong@Password -i Query_DB.sql"
 read
 sqlcmd -U SA -P RedHat123! -i Query_DB.sql
 
