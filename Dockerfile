@@ -28,9 +28,8 @@ EXPOSE 1433
 VOLUME /var/opt/mssql
 
 COPY demo ./demo
-#COPY sudo /opt/mssql-tools/bin
 
 #RUN ACCEPT_EULA=Y /opt/mssql/bin/mssql-conf setup
 # Run SQL Server process
-cmd tail -f /dev/null
-#CMD ACCEPT_EULA=Y MSSQL_PID=Developer /opt/mssql/bin/mssql-conf setup ; ACCEPT_EULA=Y MSSQL_PID=Developer sqlservr 
+#cmd tail -f /dev/null
+CMD ACCEPT_EULA=Y MSSQL_PID=Developer sqlservr 
