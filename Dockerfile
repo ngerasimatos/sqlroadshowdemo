@@ -32,7 +32,7 @@ VOLUME /var/opt/mssql
 COPY demo ./demo
 COPY sudo /opt/mssql-tools/bin
 
-RUN ACCEPT_EULA=Y;/opt/mssql/bin/mssql-conf setup
+RUN ACCEPT_EULA=Y /opt/mssql/bin/mssql-conf setup
 # Run SQL Server process
 #cmd tail -f /dev/null
 CMD sqlservr --accept-eula
