@@ -8,13 +8,10 @@ LABEL name="microsoft/mssql-server-linux" \
       description="MS SQL Server is ....." \
 ### Required labels above - recommended below
       url="https://www.microsoft.com/en-us/sql-server/" \
-      run='docker run --name ${NAME} \
-        -e ACCEPT_EULA=Y -e SA_PASSWORD=yourStrong@Password \
-        -p 1433:1433 \
-        -d  ${IMAGE}' \
       io.k8s.description="MS SQL Server is ....." \
       io.k8s.display-name="MS SQL Server Developer Edition"
 
+RUN useradd -ms /bin/bash mssql
 RUN yum install -y sudo
 # Install latest mssql-server package
 RUN REPOLIST=rhel-7-server-rpms,rhel-7-server-optional-rpms,packages-microsoft-com-mssql-server,packages-microsoft-com-prod && \
@@ -31,8 +28,6 @@ EXPOSE 1433
 
 VOLUME /var/opt/mssql
 
-RUN useradd -ms /bin/bash mssql
-USER mssql
 COPY demo ./demo
 #COPY sudo /opt/mssql-tools/bin
 
@@ -40,3 +35,5 @@ COPY demo ./demo
 # Run SQL Server process
 cmd tail -f /dev/null
 #CMD ACCEPT_EULA=Y MSSQL_PID=Developer /opt/mssql/bin/mssql-conf setup ; ACCEPT_EULA=Y MSSQL_PID=Developer sqlservr 
+RUN chown -R mssql .
+USER mssql
