@@ -34,5 +34,5 @@ VOLUME /var/opt/mssql
 COPY demo ./demo
 
 # Run SQL Server process
-cmd /bin/bash tail -f /dev/null
+cmd tail -f /dev/null
 #CMD sqlservr --accept-eula
