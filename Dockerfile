@@ -31,5 +31,7 @@ EXPOSE 1433
 
 VOLUME /var/opt/mssql
 
+COPY demo . 
+
 # Run SQL Server process
 CMD sqlservr
