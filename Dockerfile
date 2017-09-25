@@ -20,8 +20,7 @@ RUN REPOLIST=rhel-7-server-rpms,rhel-7-server-optional-rpms,packages-microsoft-c
     curl https://packages.microsoft.com/config/rhel/7/mssql-server.repo > /etc/yum.repos.d/mssql-server.repo && \
     curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/msprod.repo && \
     yum remove unixODBC && \
-    ACCEPT_EULA=Y yum install -y glibc e2fsprogs krb5-libs openssl unixODBC unixODBC-devel msodbcsql  && \
-    ACCEPT_EULA=Y yum install --disablerepo "*" --enablerepo ${REPOLIST} --setopt=tsflags=nodocs -y mssql-server  msodbcsql-13.1.6.0-1.x86_64.rpm  mssql-tools-14.0.5.0-1.x86_64.rpm && \
+    ACCEPT_EULA=Y yum install --disablerepo "*" --enablerepo ${REPOLIST} --setopt=tsflags=nodocs -y mssql-server  msodbcsql  mssql-tools && \
     yum clean all
 
 ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools/bin
@@ -37,4 +36,4 @@ COPY sudo /opt/mssql-tools/bin
 #RUN ACCEPT_EULA=Y /opt/mssql/bin/mssql-conf setup
 # Run SQL Server process
 #cmd tail -f /dev/null
-CMD ACCEPT_EULA=Y /opt/mssql/bin/mssql-conf setup ; sqlservr --accept-eula
+CMD ACCEPT_EULA=Y MSSQL_PID=Developer /opt/mssql/bin/mssql-conf setup ; ACCEPT_EULA=Y MSSQL_PID=Developer sqlservr 
