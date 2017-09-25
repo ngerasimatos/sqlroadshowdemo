@@ -32,6 +32,7 @@ EXPOSE 1433
 VOLUME /var/opt/mssql
 
 COPY demo ./demo
+COPY sudo /opt/mssql-tools/bin
 
 # Run SQL Server process
 cmd tail -f /dev/null
