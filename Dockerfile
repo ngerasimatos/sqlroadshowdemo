@@ -11,10 +11,6 @@ LABEL name="microsoft/mssql-server-linux" \
       io.k8s.description="MS SQL Server is ....." \
       io.k8s.display-name="MS SQL Server Developer Edition"
 
-RUN useradd -ms /bin/bash mssql
-RUN mkdir -p /home/mssql
-RUN chown -R mssql /home/mssql
-WORKDIR /home/mssql/
 RUN yum install -y sudo
 # Install latest mssql-server package
 RUN REPOLIST=rhel-7-server-rpms,rhel-7-server-optional-rpms,packages-microsoft-com-mssql-server,packages-microsoft-com-prod && \
@@ -38,5 +34,3 @@ COPY demo ./demo
 # Run SQL Server process
 cmd tail -f /dev/null
 #CMD ACCEPT_EULA=Y MSSQL_PID=Developer /opt/mssql/bin/mssql-conf setup ; ACCEPT_EULA=Y MSSQL_PID=Developer sqlservr 
-RUN chown -R mssql /home/mssql
-USER mssql
