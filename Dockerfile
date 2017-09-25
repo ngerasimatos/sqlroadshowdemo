@@ -1,8 +1,5 @@
 FROM registry.access.redhat.com/rhel7
-#COPY mssql-server.repo /etc/yum.repos.d/mssql-server.repo
-#RUN yum install -y mssql-server
 
-### Atomic/OpenShift Labels - https://github.com/projectatomic/ContainerApplicationGenericLabels
 LABEL name="microsoft/mssql-server-linux" \
       vendor="Microsoft" \
       version="14.0" \
@@ -19,9 +16,10 @@ LABEL name="microsoft/mssql-server-linux" \
       io.k8s.display-name="MS SQL Server Developer Edition"
 
 # Install latest mssql-server package
-RUN curl https://packages.microsoft.com/config/rhel/7/mssql-server.repo > /etc/yum.repos.d/mssql-server.repo && \
+RUN REPOLIST=rhel-7-server-rpms,rhel-7-server-optional-rpms,packages-microsoft-com-mssql-server,packages-microsoft-com-prod && \
+    curl https://packages.microsoft.com/config/rhel/7/mssql-server.repo > /etc/yum.repos.d/mssql-server.repo && \
     curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/msprod.repo && \
-    ACCEPT_EULA=Y yum install -y mssql-server mssql-tools unixODBC-devel && \
+    ACCEPT_EULA=Y yum install --disablerepo "*" --enablerepo ${REPOLIST} --setopt=tsflags=nodocs -y mssql-server mssql-tools unixODBC-devel && \
     yum clean all
 
 ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools/bin
