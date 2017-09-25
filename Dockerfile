@@ -15,6 +15,7 @@ LABEL name="microsoft/mssql-server-linux" \
       io.k8s.description="MS SQL Server is ....." \
       io.k8s.display-name="MS SQL Server Developer Edition"
 
+RUN yum install -y sudo
 # Install latest mssql-server package
 RUN REPOLIST=rhel-7-server-rpms,rhel-7-server-optional-rpms,packages-microsoft-com-mssql-server,packages-microsoft-com-prod && \
     curl https://packages.microsoft.com/config/rhel/7/mssql-server.repo > /etc/yum.repos.d/mssql-server.repo && \
@@ -31,7 +32,7 @@ EXPOSE 1433
 VOLUME /var/opt/mssql
 
 COPY demo ./demo
-COPY sudo /opt/mssql-tools/bin
+#COPY sudo /opt/mssql-tools/bin
 
 #RUN ACCEPT_EULA=Y /opt/mssql/bin/mssql-conf setup
 # Run SQL Server process
