@@ -34,14 +34,14 @@ read -n 1 -s
 #create resource group
 echo "az group create -n <name> -l <location>"
 read -n 1 -s
-echo "az group create -n ocpbyol -l 'East US'"
+echo "az group create -n ngocpbyol -l 'East US'"
 read -n 1 -s
-az group create -n ocpbyol -l 'East US'
+az group create -n ngocpbyol -l 'East US'
 
 #Generate Azure Active Directory Service Principal
 echo "az ad sp create-for-rbac -n <friendly name> --password <password> --role contributor --scopes /subscriptions/<subscription_id>/resourceGroups/<Resource Group Name>"
 read -n 1 -s
-echo "az ad sp create-for-rbac -n ocpazadsp --password ocpazadsp --role contributor --scopes /subscriptions/b733b6a9-e6c9-43f6-8bfc-102d1379a9ea/resourceGroups/ocpbyol"
+echo "az ad sp create-for-rbac -n ocpazadsp --password ocpazadsp --role contributor --scopes /subscriptions/b733b6a9-e6c9-43f6-8bfc-102d1379a9ea/resourceGroups/ngocpbyol"
 read -n 1 -s
-az ad sp create-for-rbac -n ocpazadsp --password ocpazadsp --role contributor --scopes /subscriptions/b733b6a9-e6c9-43f6-8bfc-102d1379a9ea/resourceGroups/ocpbyol
+az ad sp create-for-rbac -n ocpazadsp --password ocpazadsp --role contributor --scopes /subscriptions/b733b6a9-e6c9-43f6-8bfc-102d1379a9ea/resourceGroups/ngocpbyol
 read -n 1 -s
