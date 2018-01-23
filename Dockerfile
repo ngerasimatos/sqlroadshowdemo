@@ -33,3 +33,5 @@ COPY demo ./demo
 # Run SQL Server process
 #cmd tail -f /dev/null
 CMD ACCEPT_EULA=Y MSSQL_PID=Developer sqlservr 
+
+
