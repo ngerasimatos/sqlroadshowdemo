@@ -1,4 +1,4 @@
 #!/bin/bash
 xcmd=`echo $@`
 echo $xcmd
-/bin/bash -c $xcmd
+/bin/bash -c $xcmd 
