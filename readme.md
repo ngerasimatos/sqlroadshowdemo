@@ -1,13 +1,7 @@
 
-Must edit scc
+This is the demo for the MS SQL on RHEL roadshow. You will need an OpenShift enviropnment with persistent storage in order for this deployment to suceed.
 
-Enabling Images to Run with USER in the Dockerfile
+Git clone this repo to a machine with OC tools. Recommendation would be an OpenShift Master node with git installed. 
 
-To relax the security in your cluster so that images are not forced to run as a pre-allocated UID, without granting everyone access to the privileged SCC:
 
-Edit the restricted SCC:
-
-Raw
-$ oc edit scc restricted
-Change the runAsUser.Type strategy to RunAsAny.
 
