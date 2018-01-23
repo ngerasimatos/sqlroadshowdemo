@@ -8,5 +8,5 @@ spec:
   resources:
     requests:
       storage: "1Gi"
-  volumeName: "pvmssql"
+  volumeName: "pvmssql" 
 
