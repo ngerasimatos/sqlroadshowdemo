@@ -36,4 +36,6 @@ Removing the Demo
 
    $ cd ~demo-user
    $ ./cleanup.sh
+   
+   
 
