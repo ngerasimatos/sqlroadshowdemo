@@ -1,6 +1,7 @@
-oc delete project mssql
-sleep 60
-oc new-project mssql 
+#uncomment the following to cleanup the demobefore deployment
+#oc delete project mssql
+#sleep 60
+oc new-project ilovenewyork 
 oc adm policy add-scc-to-user anyuid -z default
 oc new-app https://github.com/ngerasimatos/sqlroadshowdemo
 oc env "dc/sqlroadshowdemo" -e ACCEPT_EULA=y -e SA_PASSWORD=RedHat123!
