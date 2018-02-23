@@ -1,5 +1,5 @@
 #uncomment the following to cleanup the demobefore deployment
-#oc delete project mssql
+#oc delete project ilovenewyork
 #sleep 60
 oc new-project ilovenewyork 
 oc adm policy add-scc-to-user anyuid -z default
