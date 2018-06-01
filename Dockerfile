@@ -38,6 +38,8 @@ VOLUME /var/opt/mssql/data
 
 VOLUME /var/opt/mssql
 
+COPY demo ./demo
+
 #RUN ACCEPT_EULA=Y /opt/mssql/bin/mssql-conf setup
 # Run SQL Server process
 #cmd tail -f /dev/null
