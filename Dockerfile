@@ -27,19 +27,26 @@ RUN curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/co
     yum clean all
 
 COPY uid_entrypoint /opt/mssql-tools/bin/
+
 ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools/bin
+
 RUN mkdir -p /var/opt/mssql/data && \
     chmod -R g=u /var/opt/mssql /etc/passwd
 
 ### Containers should not run as root as a good practice
 USER 10001
 
+### user name recognition at runtime w/ an arbitrary uid - for OpenShift deployments
+ENTRYPOINT [ "uid_entrypoint" ]
+
 # Default SQL Server TCP/Port
 EXPOSE 1433
 
-VOLUME /var/opt/mssql/data
+VOLUME /var/opt/mssql
 
-### user name recognition at runtime w/ an arbitrary uid - for OpenShift deployments
-ENTRYPOINT [ "uid_entrypoint" ]
+COPY demo ./demo
+
+#RUN ACCEPT_EULA=Y /opt/mssql/bin/mssql-conf setup
 # Run SQL Server process
-CMD sqlservr
+#cmd tail -f /dev/null
+CMD ACCEPT_EULA=Y MSSQL_PID=Developer sqlservr 
