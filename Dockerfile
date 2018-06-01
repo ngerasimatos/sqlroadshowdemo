@@ -24,8 +24,6 @@ LABEL name="microsoft/mssql-server-linux" \
 RUN curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/7/mssql-server-2017.repo && \
     curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/7/prod.repo && \
     ACCEPT_EULA=Y yum install -y mssql-server mssql-tools unixODBC-devel && \
-    yum clean all
-
 
 ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools/bin
 
