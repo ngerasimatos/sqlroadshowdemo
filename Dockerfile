@@ -20,30 +20,26 @@ LABEL name="microsoft/mssql-server-linux" \
       io.k8s.description="MS SQL Server is ....." \
       io.k8s.display-name="MS SQL Server"
 
-   
-RUN REPOLIST=rhel-7-server-rpms,rhel-7-server-optional-rpms,packages-microsoft-com-mssql-server-2017,packages-microsoft-com-prod && \
-      curl https://packages.microsoft.com/config/rhel/7/mssql-server-2017.repo > /etc/yum.repos.d/mssql-server.repo && \
-      curl https://packages.microsoft.com/config/rhel/7/prod.repo > /etc/yum.repos.d/msprod.repo && \
-      yum remove unixODBC && \
-      ACCEPT_EULA=Y yum install --disablerepo "*" --enablerepo ${REPOLIST} --setopt=tsflags=nodocs -y mssql-server  msodbcsql  mssql-tools && \
-
-      
 # Install latest mssql-server package
 RUN curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/config/rhel/7/mssql-server-2017.repo && \
     curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/7/prod.repo && \
     ACCEPT_EULA=Y yum install -y mssql-server mssql-tools unixODBC-devel && \
+    yum clean all
 
+COPY uid_entrypoint /opt/mssql-tools/bin/
 ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools/bin
+RUN mkdir -p /var/opt/mssql/data && \
+    chmod -R g=u /var/opt/mssql /etc/passwd
+
 
 # Default SQL Server TCP/Port
 EXPOSE 1433
 
-VOLUME /var/opt/mssql
+VOLUME /var/opt/mssql/data
 
-COPY demo ./demo
+VOLUME /var/opt/mssql
 
 #RUN ACCEPT_EULA=Y /opt/mssql/bin/mssql-conf setup
 # Run SQL Server process
 #cmd tail -f /dev/null
 CMD ACCEPT_EULA=Y MSSQL_PID=Developer sqlservr 
-
