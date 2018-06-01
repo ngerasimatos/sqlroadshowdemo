@@ -26,8 +26,9 @@ RUN curl -o /etc/yum.repos.d/mssql-server.repo https://packages.microsoft.com/co
     ACCEPT_EULA=Y yum install -y mssql-server mssql-tools unixODBC-devel && \
     yum clean all
 
-COPY uid_entrypoint /opt/mssql-tools/bin/
+
 ENV PATH=${PATH}:/opt/mssql/bin:/opt/mssql-tools/bin
+
 RUN mkdir -p /var/opt/mssql/data && \
     chmod -R g=u /var/opt/mssql /etc/passwd
 
